@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Antonio - 75203</title>
+  </head>
+  <style>
+    /* Ensure the section takes up the full viewport height */
+    #color-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Vertical alignment */
+      align-items: center; /* Horizontal alignment */
+      transition: background-color 0.3s ease; /* Smooth transition */
+    }
+
+    /* Styling for the hex code display box */
+    #hex-display {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 20px 40px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    /* Styling for the button */
+    #change-color-btn {
+      padding: 10px 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: white;
+    }
+
+    #change-color-btn:hover {
+      background-color: #555;
+    }
+  </style>
+
+  <body>
+    <section id="color-section">
+      <div id="hex-display">#FFFFFF</div>
+
+      <button id="change-color-btn">
+        <i class="fas fa-sync-alt"></i> Change Color
+      </button>
+    </section>
+
+    <script>
+      // Function to generate a random integer between 0 and max-1
+      function getRandomNumber(max) {
+        // Math.random() returns 0 to 0.999... multiplying by max and flooring gives 0 to max-1
+        return Math.floor(Math.random() * max);
+      }
+
+      // Array containing all valid hexadecimal characters
+      const hexChars = [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+      ];
+
+      // Selecting DOM elements
+      const section = document.getElementById("color-section");
+      const btn = document.getElementById("change-color-btn");
+      const display = document.getElementById("hex-display");
+
+      // Attach click event listener using an arrow function
+      btn.addEventListener("click", () => {
+        // Start with the hash symbol
+        let hexColor = "#";
+
+        // Loop 6 times to generate each digit of the RRGGBB code
+        for (let i = 0; i < 6; i++) {
+          // Get a random index between 0 and 15
+          const randomIndex = getRandomNumber(hexChars.length);
+          // Append the character at that index to our string
+          hexColor += hexChars[randomIndex];
+        }
+
+        // Apply the generated string as the background color of the section
+        section.style.backgroundColor = hexColor;
+        // Update the text inside the display box
+        display.textContent = hexColor;
+      });
+    </script>
+  </body>
+</html>
